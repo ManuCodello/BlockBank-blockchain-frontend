@@ -86,7 +86,7 @@ export default function LendFiDashboard() {
                     <div className="flex items-center space-x-8">
                         <div className="flex items-center space-x-2">
                             <div className="w-9 h-9 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center glow-blue"><Coins className="h-5 w-5 text-white" /></div>
-                            <h1 className="text-2xl font-bold gradient-text pulse-slow">LendFi Protocol</h1>
+                            <h1 className="text-2xl font-bold gradient-text pulse-slow">Block Bank</h1>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 ml-auto"><ConnectWalletButton /></div>
