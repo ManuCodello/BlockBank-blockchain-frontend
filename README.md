@@ -1,137 +1,122 @@
-# BlockBank - Un Mercado de Préstamos Descentralizado
+# 🏦 BlockBank – Blockchain Frontend
 
-LendFi es un protocolo de finanzas descentralizadas (DeFi) que opera en la blockchain de Ethereum. Permite a los usuarios prestar sus criptoactivos para ganar intereses, o pedir prestado contra un colateral de ETH. El protocolo está diseñado con un modelo de interés dinámico, comisiones para el dueño y un robusto sistema de liquidación para garantizar la solvencia.
+![Project Banner](https://img.shields.io/badge/Frontend-Blockchain-blue?style=for-the-badge)
+![Tech Stack](https://img.shields.io/badge/Tech-React%20%7C%20TailwindCSS%20%7C%20Vite%20%7C%20Web3.js-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-Este proyecto combina un contrato inteligente autónomo (backend on-chain) con una interfaz de usuario moderna (frontend off-chain) para crear una experiencia de usuario completa y funcional.
+## 🚀 Overview
+**BlockBank** is a decentralized banking application built on blockchain technology. This repository contains the **frontend** of the platform, designed to interact with Ethereum smart contracts and offer a modern, secure, and responsive user experience.
 
----
-
-## ⚙️ Arquitectura del Sistema
-
-El proyecto sigue una arquitectura Web3 estándar:
-
-* **Backend (On-Chain):** Un único contrato inteligente, `LendingProtocol.sol`, desplegado en una red compatible con EVM (como la red de pruebas Sepolia). Este contrato es autónomo y contiene toda la lógica del negocio.
-* **Frontend (Off-Chain):** Una aplicación web construida con Next.js y React. Se comunica directamente con el contrato inteligente a través de la billetera del usuario (ej. MetaMask).
-* **La Conexión:** El frontend utiliza librerías como Wagmi y Ethers.js, junto con el **ABI** y la **dirección** del contrato, para leer datos de la blockchain y proponer transacciones para que el usuario las firme.
-
----
-
-## ✨ Características y Componentes de la Interfaz
-
-La aplicación se presenta como un dashboard moderno, limpio y responsive, con un tema oscuro construido con Next.js, TypeScript y Tailwind CSS.
-
-### 1. Encabezado Principal (Header)
-* **Título:** "BlockBank" a la izquierda.
-* **Navegación:** Enlaces a "Dashboard" y "Docs".
-* **Conexión de Billetera:** Un botón "Connect Wallet" a la derecha, que al conectarse muestra la dirección acortada del usuario (ej. `0x123...4567`).
-
-### 2. Estructura Principal con Pestañas
-El cuerpo de la aplicación se organiza mediante un sistema de pestañas para una navegación clara entre las diferentes funcionalidades.
+The project simulates the behavior of a **digital savings bank** where users can:
+- Create blockchain-based accounts.
+- Deposit and withdraw cryptocurrency (ETH).
+- View balance updates in real time.
+- Interact directly with smart contracts through MetaMask.
 
 ---
 
-### Pestaña del `Dashboard`
-La vista principal que ofrece un resumen del estado del protocolo y la posición del usuario.
-
-* **Métricas Clave del Protocolo:**
-    * `Total Liquidity`: Muestra el total de STK en la piscina.
-    * `Total Borrows`: Muestra el total de STK prestados.
-    * `ETH Price (in STK)`: Muestra el precio actual del colateral.
-    * `Protocol Fees`: Muestra las comisiones acumuladas para el dueño.
-* **Posición del Usuario (si está conectado):**
-    * `My STK Balance`: El saldo de STK del usuario.
-    * `My Liquidity Provided`: Cuánto STK ha depositado el usuario en la piscina.
+## 🧠 Core Features
+- 🏦 **Decentralized Banking:** Connects directly with Ethereum blockchain.
+- 💳 **Wallet Integration:** Seamless MetaMask authentication.
+- 💸 **Real-Time Transactions:** Instant deposits, withdrawals, and balance display.
+- 🖥️ **Modern UI/UX:** Built using React + TailwindCSS with responsive design.
+- ⚙️ **Smart Contract Interaction:** Powered by Web3.js for communication with Solidity backend.
 
 ---
 
-### Pestaña de `Lend`
-Permite a los usuarios proveer liquidez al protocolo para ganar intereses.
-
-* **Funcionalidades:**
-    * Un campo de entrada (`Input`) para especificar la cantidad de STK a depositar.
-    * Dos botones de acción: `Deposit Liquidity` y `Withdraw Liquidity`.
-    * Muestra claramente el saldo de STK del usuario y su liquidez actual.
-
----
-
-### Pestaña de `Borrow`
-Gestiona la creación y el pago de préstamos.
-
-* **Si el usuario NO tiene un préstamo activo:**
-    * Un formulario para crear un nuevo préstamo.
-    * Un `Input` para ingresar la cantidad de **ETH a depositar como colateral**.
-    * Un botón `Borrow STK`.
-* **Si el usuario SÍ tiene un préstamo activo:**
-    * Muestra los detalles del préstamo: `Collateral Deposited (ETH)`, `STK Borrowed` y `Health Factor`.
-    * Un botón principal: `Repay Loan`.
+## 🛠️ Tech Stack
+| Layer | Technology |
+|:------|:------------|
+| Frontend Framework | React + Vite |
+| Styling | Tailwind CSS |
+| Blockchain Connection | Web3.js |
+| Wallet Integration | MetaMask |
+| Backend Smart Contracts | Solidity (Deployed on Ganache/Testnet) |
 
 ---
 
-### Pestaña de `Liquidate`
-La interfaz para el mecanismo de seguridad del protocolo.
-
-* **Funcionalidades:**
-    * Un `Input` para pegar la dirección de una billetera y verificar su estado.
-    * Un botón `Check Loan Health`.
-    * Un área de texto para mostrar el "Health Factor" del préstamo.
-    * Si el préstamo es riesgoso (Health Factor bajo), se activa un botón `Liquidate`.
-
----
-
-### Pestaña de `Admin Panel`
-Una sección restringida con funciones exclusivas para el dueño del contrato.
-
-* **Herramientas Administrativas:**
-    * **Mint Mock STK:** Formulario para crear tokens de prueba y enviarlos a cualquier dirección.
-    * **Update ETH Price:** Formulario para cambiar el precio del colateral (simulando un oráculo).
-    * **Withdraw Fees:** Muestra las comisiones acumuladas y un botón para que el dueño las retire.
+## 📂 Folder Structure
+```
+blockbank-blockchain-frontend/
+├── public/                # Static assets
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── pages/             # Main page views
+│   ├── hooks/             # Custom React hooks
+│   ├── utils/             # Helper and config functions
+│   ├── App.jsx            # Main App component
+│   └── main.jsx           # Entry point with React DOM
+├── package.json
+└── tailwind.config.js
+```
 
 ---
 
-## 🚀 Guía de Instalación y Prueba
+## ⚡ Getting Started
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/ManuCodello/BlockBank-blockchain-frontend.git
+cd BlockBank-blockchain-frontend
+```
 
-### Requisitos Previos
-* [Node.js](https://nodejs.org/) (v18 o superior)
-* Una billetera de navegador como [MetaMask](https://metamask.io/)
-* ETH de prueba en la red Sepolia (obtenible en un [faucet como sepoliafaucet.com](https://sepoliafaucet.com/))
+### 2️⃣ Install Dependencies
+```bash
+npm install
+```
 
-### Parte 1: Configurar y Correr el Frontend
-1.  **Clonar el Repositorio:**
-    ```bash
-    git clone [https://github.com/ManuCodello/blockchain-SavingBank.git](https://github.com/ManuCodello/blockchain-SavingBank.git)
-    cd blockchain-SavingBank/BlockBank
-    ```
-2.  **Instalar Dependencias:**
-    ```bash
-    npm install
-    ```
-3.  **Conectar con el Backend:**
-    * Abre `lib/contracts/LendingProtocol.json` y pega el **ABI**.
-    * Abre `lib/contract.ts` y pega la **dirección** de tu contrato.
-4.  **Iniciar la Aplicación:**
-    ```bash
-    npm run dev
-    ```
-5.  Abre tu navegador en `http://localhost:3000`.
+### 3️⃣ Start the Development Server
+```bash
+npm run dev
+```
 
-### Parte 2: Guion de Prueba de Funcionalidades
-Usa 3 cuentas diferentes en MetaMask: **Dueño**, **Ahorrador** y **Liquidador**.
+### 4️⃣ Connect MetaMask
+Make sure MetaMask is installed and configured to connect with your local blockchain (e.g., **Ganache** or **Sepolia Testnet**).
 
-1.  **Acto I: Fundación**
-    * Conecta la billetera del **Dueño**.
-    * Ve al "Admin Panel" y usa `Mint Mock STK` para enviar `50000` STK al **Ahorrador**.
-    * Cambia a la billetera del **Ahorrador**, ve a "Lend" y deposita los `50000` STK.
+---
 
-2.  **Acto II: Préstamo Saludable**
-    * Con la billetera del **Ahorrador**, ve a "Borrow" y deposita `1` ETH como colateral para pedir un préstamo.
-    * Paga el préstamo con el botón "Repay Full Loan".
+## 🔗 Smart Contract Integration
+To interact with the backend smart contracts:
+- Ensure your blockchain network is running (e.g., Ganache CLI or local Hardhat node).
+- Deploy your Solidity contracts.
+- Update contract ABI and address in `/src/utils/contractConfig.js`.
 
-3.  **Acto III: Liquidación**
-    * Vuelve a crear un préstamo.
-    * Como **Dueño**, ve a "Admin Panel" y baja el precio del ETH (ej. a `1100`).
-    * Ve a "Liquidate", pega la dirección del **Ahorrador** y haz clic en "Check Health".
-    * Como **Dueño**, envía STK al **Liquidador**.
-    * Cambia a la billetera del **Liquidador** y haz clic en "Liquidate".
+Example configuration:
+```javascript
+export const contractAddress = "0x123...abc";
+export const contractABI = [ /* ABI JSON */ ];
+```
 
-4.  **Acto IV: Ganancias del Protocolo**
-    * Como **Dueño**, ve a "Admin Panel" y retira las ganancias con el botón "Withdraw".
+---
+
+## 🎨 UI Showcase
+| Feature | Screenshot |
+|:--------:|:-----------:|
+| Dashboard | ![Dashboard](https://via.placeholder.com/600x300.png?text=Dashboard+Preview) |
+| Wallet Connection | ![Wallet](https://via.placeholder.com/600x300.png?text=Wallet+Connection) |
+
+---
+
+## 🧩 Future Improvements
+- ✅ Multi-token support (ERC-20, ERC-721)
+- ✅ Transaction history with blockchain explorer integration
+- ✅ Integration with backend for user analytics
+- ✅ Deploy smart contracts to Ethereum mainnet
+
+---
+
+## 👨‍💻 Author
+**Developed by [Manu Codello](https://github.com/ManuCodello)**  
+💡 Passionate about Blockchain, AI, and Full-Stack Development.
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.  
+See the [LICENSE](LICENSE) file for more information.
+
+---
+
+## 🌐 Connect
+[![GitHub](https://img.shields.io/badge/GitHub-ManuCodello-black?style=flat&logo=github)](https://github.com/ManuCodello)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-ManuCodello-blue?style=flat&logo=linkedin)](https://linkedin.com/in/manucodello)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-success?style=flat&logo=vercel)](#)
